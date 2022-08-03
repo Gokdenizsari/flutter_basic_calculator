@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hesapmakinesi/alert.dart';
 
 void main() => runApp(MyApp());
 
@@ -46,39 +47,39 @@ class _AnaEkranState extends State<AnaEkran> {
       if (s1 != null && s2 != null) {
         sonuc = s1! + s2!;
       } else {
-        print("Error. Please enter number");
+        showAlertDialog(context);
       }
     });
   }
 
   minus() {
     setState(() {
-      s1 = num.parse(t1.text);
-      s2 = num.parse(t2.text);
+      s1 = num.tryParse(t1.text);
+      s2 = num.tryParse(t2.text);
       if (s1 != null && s2 != null) {
         sonuc = s1! - s2!;
       } else {
-        print("Error. Please enter number");
+        showAlertDialog(context);
       }
     });
   }
 
   multiply() {
     setState(() {
-      s1 = num.parse(t1.text);
-      s2 = num.parse(t2.text);
+      s1 = num.tryParse(t1.text);
+      s2 = num.tryParse(t2.text);
       if (s1 != null && s2 != null) {
         sonuc = s1! / s2!;
       } else {
-        print("Error. Please enter number");
+        showAlertDialog(context);
       }
     });
   }
 
   divide() {
     setState(() {
-      s1 = num.parse(t1.text);
-      s2 = num.parse(t2.text);
+      s1 = num.tryParse(t1.text);
+      s2 = num.tryParse(t2.text);
       if (s1 != null && s2 != null) {
         sonuc = s1! * s2!;
       } else {
@@ -156,4 +157,35 @@ class _AnaEkranState extends State<AnaEkran> {
       ),
     );
   }
+}
+
+showAlertDialog(BuildContext context) {
+  
+  Widget okButton = TextButton(
+    child: Text("OK"),
+    onPressed: () {},
+  );
+
+  CupertinoAlertDialog alert = CupertinoAlertDialog(
+    title: Text("Error"),
+    content: Text("Please enter the number"),
+    actions: [CupertinoDialogAction(child: Text("ok"))],
+  );
+
+  
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+
+  // set up the AlertDialog
+  /* AlertDialog alert = AlertDialog(
+    title: Text("My title"),
+    content: Text("Please enter h."),
+    actions: [
+      okButton,
+    ],
+  );*/
 }
